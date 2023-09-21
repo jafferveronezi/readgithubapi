@@ -40,6 +40,12 @@ class ListaDeRepositorios():
 
         pd.DataFrame(data).to_parquet(arquivo_parquet)
 
+    def converter_para_json(self, data, arquivo_json):
+        if os.path.exists(arquivo_json):
+            os.remove(arquivo_json)
+
+        pd.DataFrame(data).to_json(arquivo_json)   
+        
 usuario = "usuario"
 token = "token"
 lista_repositorios = ListaDeRepositorios(usuario, token)
@@ -60,3 +66,18 @@ lista_repositorios.converter_para_parquet(labels, arquivo_parquet_labels)
 print(f'Dados de issues salvos em {arquivo_parquet_issues}')
 print(f'Dados de milestones salvos em {arquivo_parquet_milestones}')
 print(f'Dados de labels salvos em {arquivo_parquet_labels}')
+
+# Converte e salva os dados como arquivo json
+
+arquivo_json_issues = "caminho_do_arquivo.json"
+arquivo_json_milestones = "caminho_do_arquivo.json"
+arquivo_json_labels = "caminho_do_arquivo.json"
+
+lista_repositorios.converter_para_json(issues, arquivo_json_issues)
+lista_repositorios.converter_para_json(milestones, arquivo_json_milestones)
+lista_repositorios.converter_para_json(labels, arquivo_json_labels)
+
+print(f'Dados de issues salvos em {arquivo_json_issues}')
+print(f'Dados de milestones salvos em {arquivo_json_milestones}')
+print(f'Dados de labels salvos em {arquivo_json_labels}')
+
